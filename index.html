@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Past Perfect &amp; Simple Past — Romeo and Juliet (B1)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:        #111111;
+    --ink-soft:   #3A3A3A;
+    --gray:       #6E6E6E;
+    --gray-soft:  #E4E4E4;
+    --white:      #FFFFFF;
+    --r-lg: 26px;
+    --r-md: 16px;
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; }
+  }
+
+  html,body{ height:100%; }
+
+  body{
+    font-family:'Inter', sans-serif;
+    background:var(--white);
+    color:var(--ink);
+    min-height:100vh;
+    padding:36px 18px;
+    position:relative;
+    overflow-x:hidden;
+  }
+
+  .bg-blob{ position:fixed; border-radius:50%; filter:blur(60px); z-index:0; opacity:0.6; }
+  .bg-blob.b1{ width:360px; height:360px; background:var(--gray-soft); top:-140px; right:-120px; }
+  .bg-blob.b2{ width:320px; height:320px; background:var(--gray-soft); bottom:-140px; left:-120px; }
+
+  .stage{ max-width:620px; margin:0 auto; position:relative; z-index:1; }
+
+  /* ---------- Persistent header ---------- */
+  .header-row{ display:flex; align-items:center; gap:10px; margin-bottom:26px; }
+  .m1-badge{
+    width:44px; height:44px; border-radius:12px;
+    background:var(--ink); color:var(--white);
+    border:2.5px solid var(--ink);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Poppins',sans-serif; font-weight:800; font-size:15px;
+    box-shadow:0 6px 12px -4px rgba(17,17,17,0.35);
+  }
+  .m1-label{ font-family:'Poppins',sans-serif; font-weight:800; font-size:16px; color:var(--ink); }
+  .m1-label span{ color:var(--gray); }
+
+  .meta-row{
+    display:flex; align-items:center; justify-content:space-between;
+    margin-bottom:18px; gap:10px; flex-wrap:wrap;
+  }
+  .q-count{
+    font-family:'Inter',sans-serif; font-weight:700; font-size:13px;
+    letter-spacing:0.04em; color:var(--ink); text-transform:uppercase;
+  }
+  .dots{ display:flex; gap:5px; flex-wrap:wrap; max-width:260px; }
+  .dot{
+    width:9px; height:9px; border-radius:50%;
+    border:2px solid var(--gray-soft); background:transparent;
+    transition:background .25s ease, border-color .25s ease;
+  }
+  .dot.current{ background:var(--ink); border-color:var(--ink); }
+  .dot.done{ background:var(--ink-soft); border-color:var(--ink-soft); }
+
+  .score-badge{
+    font-family:'Inter',sans-serif; font-weight:800; font-size:13px;
+    color:var(--ink); background:var(--white);
+    border:2.5px solid var(--ink);
+    padding:8px 16px; border-radius:999px; white-space:nowrap;
+  }
+
+  /* ---------- Screens ---------- */
+  .screen{ display:none; }
+  .screen.active{ display:block; animation:fadeUp .45s ease both; }
+  @keyframes fadeUp{ from{ opacity:0; transform:translateY(12px); } to{ opacity:1; transform:translateY(0); } }
+
+  /* ---------- WELCOME ---------- */
+  .welcome{ text-align:center; padding:36px 18px 10px; }
+
+  .eyebrow-pill{
+    display:inline-flex; align-items:center; gap:7px;
+    background:var(--ink); color:var(--white);
+    font-family:'Inter',sans-serif; font-weight:700; font-size:12px;
+    letter-spacing:0.1em; text-transform:uppercase;
+    padding:9px 18px; border-radius:999px; margin-bottom:26px;
+  }
+
+  h1.title{
+    position:relative; display:inline-block;
+    font-family:'Poppins',sans-serif; font-weight:900;
+    font-size:clamp(30px,7.6vw,50px);
+    text-transform:uppercase; color:var(--ink);
+    letter-spacing:-0.01em; line-height:1.08; margin-bottom:22px;
+  }
+  h1.title::after{
+    content:""; position:absolute; left:2%; right:2%; bottom:-8px;
+    height:15px; background:var(--gray-soft); border-radius:8px; z-index:-1;
+  }
+
+  p.lead{ font-size:17px; font-weight:700; color:var(--ink); margin-bottom:6px; }
+  p.sub-lead{ font-size:14px; color:var(--gray); margin-bottom:34px; }
+
+  .preview-row{ display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-bottom:32px; }
+  .chip-preview{
+    position:relative;
+    font-family:'Inter',sans-serif; font-weight:700; font-size:15px;
+    background:var(--white); color:var(--ink);
+    border:2.5px solid var(--ink); border-radius:14px; padding:13px 20px;
+  }
+  .chip-preview small{
+    display:block; font-size:10.5px; font-weight:700; color:var(--gray);
+    text-transform:uppercase; letter-spacing:0.06em; margin-bottom:3px;
+  }
+  .chip-preview::before{
+    content:""; position:absolute; left:18px; bottom:-9px;
+    border-left:8px solid transparent; border-right:8px solid transparent;
+    border-top:8px solid var(--ink);
+  }
+  .chip-preview::after{
+    content:""; position:absolute; left:20px; bottom:-6px;
+    border-left:6px solid transparent; border-right:6px solid transparent;
+    border-top:6px solid var(--white);
+  }
+
+  .info-box{
+    text-align:left; background:var(--gray-soft); border:2.5px dashed var(--gray);
+    border-radius:var(--r-md); padding:18px 20px; margin:0 0 34px;
+    font-size:13.5px; color:var(--ink); line-height:1.55;
+  }
+  .info-box strong{ color:var(--ink); }
+
+  .btn{
+    font-family:'Inter',sans-serif; font-weight:700; font-size:15px;
+    border-radius:999px; padding:17px 32px; cursor:pointer;
+    display:inline-flex; align-items:center; justify-content:center; gap:9px;
+    transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+    border:none;
+  }
+  .btn:focus-visible{ outline:3px solid var(--gray); outline-offset:3px; }
+
+  .btn-primary{
+    background:var(--ink); color:var(--white);
+    border:3px solid var(--ink); box-shadow:4px 5px 0 var(--gray);
+    width:100%; max-width:340px;
+  }
+  .btn-primary:hover{ transform:translate(-2px,-2px); box-shadow:6px 7px 0 var(--gray); }
+  .btn-primary:active{ transform:translate(1px,2px); box-shadow:2px 2px 0 var(--gray); }
+  .btn-primary:disabled{
+    background:var(--gray-soft); border-color:var(--gray-soft); color:var(--gray);
+    box-shadow:none; cursor:not-allowed; transform:none;
+  }
+
+  .btn-sm{
+    font-size:13px; padding:10px 18px; border-radius:999px;
+    background:var(--white); color:var(--ink);
+    border:2.5px solid var(--ink); box-shadow:2.5px 3px 0 rgba(17,17,17,0.18);
+  }
+  .btn-sm:hover{ transform:translate(-1px,-1px); box-shadow:3.5px 4px 0 rgba(17,17,17,0.18); }
+  .btn-sm:active{ transform:translate(1px,1px); box-shadow:1px 1px 0 rgba(17,17,17,0.18); }
+  .btn-sm.recording{ background:var(--ink); color:var(--white); border-color:var(--ink); animation:pulseRec 1s ease-in-out infinite; }
+  @keyframes pulseRec{ 0%,100%{ box-shadow:2.5px 3px 0 rgba(17,17,17,0.18);} 50%{ box-shadow:2.5px 3px 0 rgba(17,17,17,0.18), 0 0 0 6px rgba(110,110,110,0.35);} }
+
+  /* ---------- ACTIVITY CARD ---------- */
+  .card{
+    background:var(--white); border:3px solid var(--ink);
+    border-radius:var(--r-lg); box-shadow:9px 10px 0 var(--gray-soft);
+    padding:32px 30px; margin-bottom:20px;
+  }
+  .card-label{
+    font-family:'Inter',sans-serif; font-weight:800; font-size:14px;
+    letter-spacing:0.04em; text-transform:uppercase; color:var(--ink); margin-bottom:8px;
+  }
+  .card-sub{ font-size:14px; color:var(--gray); margin-bottom:22px; }
+
+  .photo-frame{
+    position:relative; width:100%; aspect-ratio:16/10; max-height:260px;
+    background:var(--gray-soft); border:3px solid var(--ink);
+    border-radius:var(--r-md); overflow:hidden;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:6px 7px 0 var(--gray-soft); margin-bottom:24px;
+  }
+  .photo-frame img{ width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity .35s ease; }
+  .img-loading{
+    position:absolute; font-family:'Inter',sans-serif; font-size:12.5px;
+    font-weight:700; color:var(--gray); letter-spacing:0.03em;
+  }
+
+  .listen-row{ display:flex; justify-content:center; margin-bottom:26px; }
+  .btn-listen{
+    background:var(--ink); color:var(--white);
+    border:none; border-radius:999px;
+    font-family:'Inter',sans-serif; font-weight:700; font-size:13.5px;
+    padding:12px 22px; cursor:pointer;
+    display:inline-flex; align-items:center; gap:8px;
+    box-shadow:3px 4px 0 var(--gray-soft); transition:transform .15s ease;
+  }
+  .btn-listen:hover:not(:disabled){ transform:translate(-2px,-2px); }
+  .btn-listen:active:not(:disabled){ transform:translate(1px,2px); }
+  .btn-listen:disabled{ background:var(--gray-soft); color:var(--gray); cursor:not-allowed; box-shadow:none; }
+  .btn-listen svg{ width:16px; height:16px; }
+  .btn-listen.speaking{ animation:speakPulse .7s ease-in-out infinite; }
+  @keyframes speakPulse{ 0%,100%{ opacity:1;} 50%{ opacity:.6;} }
+
+  .sentence-block{ text-align:center; margin-bottom:22px; }
+  .sentence-block.dialogue{ text-align:left; }
+  .sentence-text{
+    font-family:'Poppins',sans-serif; font-weight:700; font-size:17px;
+    color:var(--ink); line-height:2.35;
+  }
+  .dlg-line{ display:block; }
+  .dlg-line .speaker{ font-weight:800; color:var(--gray); margin-right:4px; }
+
+  .blank-select{
+    font-family:'Inter',sans-serif; font-weight:700; font-size:15px; color:var(--ink);
+    background-color:var(--white);
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'><path d='M1 1.5l5 5 5-5' stroke='%23111111' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+    background-repeat:no-repeat; background-position:right 9px center;
+    border:2.5px solid var(--ink); border-radius:11px;
+    padding:5px 28px 5px 11px; margin:0 3px;
+    -webkit-appearance:none; appearance:none; cursor:pointer;
+    max-width:100%;
+  }
+  .blank-select:focus{ outline:3px solid var(--gray-soft); outline-offset:1px; }
+  .blank-select.is-correct{ background-color:var(--gray-soft); }
+  .blank-select.is-wrong{ text-decoration:line-through; color:var(--gray); }
+  .blank-select:disabled{ cursor:default; opacity:1; color:var(--ink); }
+  .blank-select.is-wrong:disabled{ color:var(--gray); }
+
+  .check-row{ display:flex; justify-content:center; margin-bottom:8px; }
+  .btn-check{
+    font-family:'Inter',sans-serif; font-weight:700; font-size:14px;
+    background:var(--ink); color:var(--white);
+    border:none; border-radius:14px; padding:14px 34px; cursor:pointer;
+    box-shadow:3px 4px 0 var(--gray-soft); transition:transform .15s ease;
+  }
+  .btn-check:hover:not(:disabled){ transform:translate(-2px,-2px); }
+  .btn-check:active:not(:disabled){ transform:translate(1px,2px); }
+  .btn-check:disabled{ background:var(--gray-soft); color:var(--gray); cursor:not-allowed; box-shadow:none; }
+
+  .hint-line{ text-align:center; font-size:12.5px; color:var(--gray); min-height:18px; margin-top:6px; }
+
+  .correct-reveal{
+    font-size:13.5px; color:var(--gray); margin-top:14px; line-height:1.6; text-align:left;
+    background:var(--gray-soft); border-radius:12px; padding:12px 14px;
+  }
+  .correct-reveal strong{ color:var(--ink); }
+
+  .feedback-toast{
+    display:none; align-items:center; gap:10px;
+    font-family:'Inter',sans-serif; font-weight:800; font-size:14px;
+    padding:13px 18px; border-radius:var(--r-md);
+    margin:18px 0 0; border:2.5px solid var(--ink);
+  }
+  .feedback-toast.show{ display:flex; animation:popIn .3s cubic-bezier(.34,1.56,.64,1); }
+  @keyframes popIn{ from{ opacity:0; transform:scale(.92) translateY(-4px);} to{ opacity:1; transform:scale(1) translateY(0);} }
+  .feedback-toast.correct{ background:var(--ink); color:var(--white); box-shadow:3px 4px 0 var(--gray-soft); }
+  .feedback-toast.incorrect{ background:var(--white); color:var(--ink); box-shadow:3px 4px 0 var(--gray-soft); }
+  .feedback-toast svg{ width:18px; height:18px; flex-shrink:0; }
+
+  .shake{ animation:shake .4s ease; }
+  @keyframes shake{
+    10%,90%{ transform:translateX(-2px); }
+    20%,80%{ transform:translateX(4px); }
+    30%,50%,70%{ transform:translateX(-7px); }
+    40%,60%{ transform:translateX(7px); }
+  }
+
+  /* ---------- RECORD YOUR VOICE ---------- */
+  .record-panel{
+    display:none; margin-top:20px; background:var(--gray-soft);
+    border:2.5px dashed var(--gray); border-radius:var(--r-md); padding:18px 18px 16px;
+  }
+  .record-panel.show{ display:block; animation:popIn .3s ease both; }
+  .record-title{
+    font-family:'Inter',sans-serif; font-weight:800; font-size:12.5px;
+    letter-spacing:0.05em; text-transform:uppercase; color:var(--ink);
+    margin-bottom:6px; display:flex; align-items:center; gap:6px;
+  }
+  .record-desc{ font-size:13px; color:var(--gray); margin-bottom:14px; line-height:1.5; }
+  .record-controls{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+  .record-status{ font-size:12.5px; font-weight:700; color:var(--ink); }
+  .record-audio{ margin-top:12px; width:100%; }
+  .record-note{ font-size:12px; color:var(--gray); margin-top:10px; font-style:italic; }
+
+  .action-row{ display:flex; gap:14px; margin-top:22px; }
+  .action-row .btn{ flex:1; }
+
+  /* ---------- FINAL ---------- */
+  .final-card{ text-align:center; padding:48px 32px 40px; }
+  .trophy-wrap{
+    width:88px; height:88px; margin:0 auto 22px;
+    background:var(--ink); border-radius:22px; border:3px solid var(--ink);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:4px 5px 0 var(--gray-soft); transform:rotate(-4deg);
+    animation:trophyPop .6s cubic-bezier(.34,1.56,.64,1) both;
+  }
+  @keyframes trophyPop{ 0%{ transform:scale(0) rotate(-24deg);} 100%{ transform:scale(1) rotate(-4deg);} }
+  .trophy-wrap svg{ width:42px; height:42px; }
+
+  h2.final-title{ font-family:'Poppins',sans-serif; font-weight:900; text-transform:uppercase; font-size:28px; margin-bottom:8px; }
+  p.final-sub{ color:var(--gray); font-size:14.5px; margin-bottom:28px; }
+
+  .score-display{
+    display:inline-flex; align-items:baseline; gap:6px;
+    font-family:'Poppins',sans-serif; font-weight:900; font-size:50px; color:var(--ink); margin-bottom:4px;
+  }
+  .score-display span.of{ font-size:22px; color:var(--gray); font-weight:700; }
+  .score-label{
+    font-family:'Inter',sans-serif; font-weight:800; font-size:12px;
+    letter-spacing:0.1em; text-transform:uppercase; color:var(--gray); margin-bottom:28px;
+  }
+  .progress-track{
+    height:12px; background:var(--gray-soft); border:2px solid var(--ink);
+    border-radius:99px; overflow:hidden; margin-bottom:32px;
+  }
+  .progress-fill{ height:100%; width:0%; background:var(--ink); transition:width 1s cubic-bezier(.22,1,.36,1); }
+
+  .final-btn-row{ display:flex; flex-direction:column; gap:12px; align-items:center; }
+  .final-btn-row .btn{ width:100%; max-width:340px; }
+
+  @media (max-width:480px){
+    .card{ padding:24px 18px; }
+    .final-card{ padding:40px 20px 34px; }
+    .welcome{ padding:26px 10px 6px; }
+    .action-row{ flex-direction:column; }
+    .sentence-text{ font-size:15.5px; line-height:2.4; }
+    .blank-select{ font-size:14px; }
+  }
+  /* ---------- WORD BANK / DRAG & DROP ---------- */
+  .bank-label{
+    font-family:'Inter',sans-serif; font-weight:800; font-size:12.5px;
+    letter-spacing:.06em; text-transform:uppercase; color:var(--ink); margin:0 0 10px;
+  }
+  .bank{
+    display:flex; flex-wrap:wrap; gap:9px; justify-content:center;
+    padding:14px; border:2.5px solid var(--ink); border-radius:var(--r-md);
+    background:var(--white); box-shadow:4px 5px 0 var(--gray-soft); margin-bottom:22px;
+  }
+  .chip{
+    font-family:'Inter',sans-serif; font-weight:700; font-size:14.5px; color:var(--ink);
+    background:var(--white); border:2.5px solid var(--ink); border-radius:12px;
+    padding:8px 14px; cursor:grab; touch-action:none; user-select:none; -webkit-user-select:none;
+    box-shadow:2.5px 3px 0 rgba(17,17,17,.18); transition:transform .12s ease, background .12s ease;
+  }
+  .chip:hover:not(:disabled){ transform:translate(-1px,-1px); }
+  .chip.selected{ background:var(--ink); color:var(--white); }
+  .chip.used{ visibility:hidden; }
+  .chip:disabled{ cursor:default; }
+  .chip-ghost{
+    position:fixed; z-index:9999; pointer-events:none; opacity:.92;
+    font-family:'Inter',sans-serif; font-weight:700; font-size:14.5px;
+    background:var(--ink); color:var(--white); border:2.5px solid var(--ink); border-radius:12px;
+    padding:8px 14px; transform:translate(-50%,-50%); box-shadow:4px 5px 0 rgba(17,17,17,.25);
+  }
+  .story{
+    font-family:'Poppins',sans-serif; font-weight:600; font-size:17px; line-height:2.5;
+    color:var(--ink); text-align:left; margin-bottom:22px;
+  }
+  .blank{
+    display:inline-block; min-width:92px; min-height:34px; vertical-align:middle;
+    margin:0 3px; padding:3px 12px;
+    font-family:'Inter',sans-serif; font-weight:700; font-size:15px; line-height:1.5;
+    color:var(--ink); background:var(--white);
+    border:2.5px dashed var(--gray); border-radius:11px; text-align:center; cursor:pointer;
+  }
+  .blank.active{ border-style:solid; border-color:var(--ink); background:var(--gray-soft); }
+  .blank.drop-over{ border-style:solid; border-color:var(--ink); background:var(--gray-soft); }
+  .blank.filled{ border-style:solid; border-color:var(--ink); }
+  .blank.is-correct{ background:var(--gray-soft); border-style:solid; border-color:var(--ink); cursor:default; }
+  .blank.is-wrong{ background:var(--white); color:var(--gray); text-decoration:line-through; border-style:solid; border-color:var(--ink); cursor:default; }
+  .verb-hint{
+    font-family:'Inter',sans-serif; font-weight:700; font-size:13px; color:var(--gray);
+    text-transform:uppercase; letter-spacing:.02em; margin-right:2px; white-space:nowrap;
+  }
+  @media (max-width:480px){
+    .story{ font-size:15.5px; line-height:2.5; }
+    .blank{ min-width:78px; font-size:14px; padding:3px 9px; }
+    .chip{ font-size:13.5px; padding:7px 11px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-blob b1" aria-hidden="true"></div>
+<div class="bg-blob b2" aria-hidden="true"></div>
+
+<audio id="tts-audio" preload="none" style="display:none;"></audio>
+
+<div class="stage">
+
+  <div class="header-row">
+    <div class="m1-badge">B1</div>
+    <div class="m1-label">INTERMEDIATE <span>B1</span></div>
+  </div>
+
+  <!-- ============ WELCOME SCREEN ============ -->
+  <section class="screen active" id="screen-welcome">
+    <div class="welcome">
+      <div class="eyebrow-pill">✦ Interactive Activity</div>
+      <h1 class="title">Past Perfect &amp; Simple Past</h1>
+      <p class="lead">Complete the story of Romeo and Juliet with the correct verb forms.</p>
+      <p class="sub-lead">Look at the picture, read the story, and fill every blank from the word bank.</p>
+
+      <div class="preview-row" aria-hidden="true">
+        <div class="chip-preview"><small>Simple Past</small>went</div>
+        <div class="chip-preview"><small>Past Perfect</small>had gone</div>
+      </div>
+
+      <div class="info-box">
+        <strong>Instructions:</strong> in each question you will see a real photo and a short part of the story with blanks. The verb in capital letters after each blank, for example <strong>(GO)</strong>, is the verb you need. Choose the correct form from the <strong>word bank</strong>: tap a word and then tap a blank, or drag the word into the blank. Use the <strong>Simple Past</strong> for the main events and the <strong>Past Perfect</strong> for an action that happened <em>before</em> another past action. Press <strong>“Check”</strong> when every blank is filled. After checking, press <strong>“Listen”</strong> to hear the complete text read aloud, and use the <strong>microphone</strong> button to record yourself saying it out loud.
+      </div>
+
+      <button class="btn btn-primary" id="btn-start">
+        START ACTIVITY
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- ============ ACTIVITY SCREEN ============ -->
+  <section class="screen" id="screen-activity">
+    <div class="meta-row">
+      <div class="q-count" id="q-count">QUESTION 1 OF 10</div>
+      <div class="dots" id="dots"></div>
+      <div class="score-badge">SCORE: <span id="score-value">0</span>/<span id="score-total">26</span></div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Complete the sentence</div>
+      <div class="card-sub">Look at the picture and put the correct verb form in every blank.</div>
+
+      <div class="photo-frame" id="photo-frame">
+        <div class="img-loading">Loading photo…</div>
+        <img id="photo-img" alt="A real photograph related to the story." />
+      </div>
+
+      <div class="listen-row">
+        <button class="btn-listen" id="btn-listen" type="button" disabled>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"></path></svg>
+          <span id="listen-label">ANSWER FIRST</span>
+        </button>
+      </div>
+
+      <div class="bank-label">Word bank</div>
+      <div class="bank" id="bank"></div>
+
+      <div class="story" id="story"></div>
+
+      <div class="check-row">
+        <button class="btn-check" id="btn-check" type="button">CHECK</button>
+      </div>
+      <div class="hint-line" id="hint-line"></div>
+      <div class="correct-reveal" id="correct-reveal" style="display:none;"></div>
+
+      <div class="feedback-toast" id="feedback-toast"></div>
+
+      <div class="record-panel" id="record-panel">
+        <div class="record-title">🎤 Practice your pronunciation</div>
+        <div class="record-desc">The correct text was:<br><strong id="record-sentence">—</strong><br>Record yourself saying it out loud, then listen back.</div>
+        <div class="record-controls">
+          <button class="btn-sm" id="btn-record" type="button">● Record my voice</button>
+          <span class="record-status" id="record-status"></span>
+        </div>
+        <audio class="record-audio" id="record-audio" controls style="display:none;"></audio>
+        <div class="record-note" id="record-note"></div>
+      </div>
+
+      <div class="action-row">
+        <button class="btn btn-primary" id="btn-next" style="display:none;">NEXT QUESTION
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FINAL SCREEN ============ -->
+  <section class="screen" id="screen-final">
+    <div class="card final-card">
+      <div class="trophy-wrap">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M8 21h8M12 17v4M7 4h10v4a5 5 0 01-10 0V4z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M7 5H4a1 1 0 00-1 1v1a4 4 0 004 4M17 5h3a1 1 0 011 1v1a4 4 0 01-4 4" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h2 class="final-title">Well done!</h2>
+      <p class="final-sub">You completed the Past Perfect &amp; Simple Past activity.</p>
+
+      <div class="score-display"><span id="final-score">0</span><span class="of">/ <span id="final-total">26</span></span></div>
+      <div class="score-label">Correct blanks</div>
+
+      <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+
+      <div class="final-btn-row">
+        <button class="btn btn-primary" id="btn-retry">TRY AGAIN</button>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+(function(){
+
+  const pex = id => "https://images.pexels.com/photos/" + id + "/pexels-photo-" + id + ".jpeg?auto=compress&cs=tinysrgb&h=627&fit=crop&w=1200";
+  // B(answer, verb): a blank. Words are stored as in the original activity and shown in lower case.
+  function B(ans, verb){ return { ans:ans.toLowerCase(), verb:verb }; }
+
+  // Texts, verbs in brackets, correct answers and wrong options come from the
+  // original activity ("Past Perfect & Simple Past", Wordwall).
+  const ITEMS = [
+    { img:pex("8780508"), voice:'M',
+      parts:["In the 15th century, two rich families from Verona ", B("WERE","BE"), " bitter enemies. They ", B("FOUGHT","FIGHT"), " constantly."],
+      wrong:["WAS","HAD BEEN","HAD FOUGHT"] },
+    { img:pex("13335583"), voice:'M',
+      parts:["One evening, Romeo and his best friend Mercutio ", B("WENT","GO"), " to a party at the Capulet's house, where Romeo ", B("FELL","FALL"), " in love with Juliet, the daughter of his family's worst enemy. Of course, they ", B("HAD NOT RECOGNISED","RECOGNISE"), " each other during the party."],
+      wrong:["HAD GONE","HAD FALLEN","DIDN'T RECOGNISED"] },
+    { img:pex("35999736"), voice:'F',
+      parts:["The following day, they ", B("MARRIED","MARRY"), " in secret because Romeo ", B("HAD CLIMBED","CLIMB"), " the wall to Juliet's balcony and they ", B("HAD DECLARED","DECLARE"), " eternal love for each other."],
+      wrong:["HAD MARRIED","CLIMBED","DECLARED"] },
+    { img:pex("13335592"), voice:'M',
+      parts:["The day after the wedding, Romeo ", B("KILLED","KILL"), " Tybalt, Juliet's cousin, because Tybalt ", B("HAD KILLED","KILL"), " Mercutio, Romeo's best friend."],
+      wrong:[] },
+    { img:pex("6669802"), voice:'F',
+      parts:["Juliet ", B("WAS","BE"), " desperate because the prince ", B("HAD EXPELLED","EXPEL"), " Romeo from the city."],
+      wrong:["WERE","HAD BEEN","EXPELLED"] },
+    { img:pex("7964185"), voice:'F',
+      parts:["Juliet ", B("DECIDED","DECIDE"), " to visit Friar Lawrence because her dad ", B("HAD ARRANGED","ARRANGE"), " her a wedding with a man. Friar ", B("DEVISED","DEVISE"), " a plan: she would drink a potion to appear to be dead for 24 hours. Then Romeo could come back and they would escape together."],
+      wrong:["HAD DECIDED","ARRANGED","HAD DEVISED"] },
+    { img:pex("23224670"), voice:'M',
+      parts:["By the time Romeo ", B("HEARD","HEAR"), " Juliet ", B("WAS","BE"), " dead, he ", B("HAD NOT HEARD","HEAR"), " about the plan."],
+      wrong:["WERE","HAD BEEN"] },
+    { img:pex("1556716"), voice:'M',
+      parts:["He was so desperate that he ", B("DECIDED","DECIDE"), " to buy a poison. He ", B("DRANK","DRINK"), " it beside Juliet's body in the Chapel."],
+      wrong:["HAD DECIDED","HAD DRUNK"] },
+    { img:pex("9641782"), voice:'F',
+      parts:["When Juliet ", B("WOKE UP","WAKE UP"), " a minute later, she realized Romeo ", B("HAD DIED","DIE"), " so she ", B("TOOK","TAKE"), " his dagger and ", B("DROVE","DRIVE"), " it into her heart."],
+      wrong:["HAD WOKEN UP","DIED","HAD TAKEN","HAD DRIVEN"] },
+    { img:pex("5398879"), voice:'F',
+      parts:["When the families found out what Romeo and Juliet ", B("HAD DONE","DO"), ", they ", B("PROMISED","PROMISE"), " to live in peace. “If the families hadn't hated each other, the children wouldn't have died.”"],
+      wrong:["DID","HAD PROMISED"] }
+  ];
+
+  const isBlank = p => typeof p !== 'string';
+  ITEMS.forEach(it => {
+    it.blanks = it.parts.filter(isBlank);
+    it.bank = it.blanks.map(b => b.ans).concat(it.wrong.map(w => w.toLowerCase()));
+  });
+  const TOTAL = ITEMS.reduce((n,it) => n + it.blanks.length, 0);
+
+  let current = 0;
+  let score = 0;
+  let locked = false;
+  let placed = [];        // per blank: chip index in the bank, or null
+  let order = [];         // shuffled bank order (indexes into item.bank)
+  let activeBlank = null;
+  let mediaRecorder = null;
+  let recordedChunks = [];
+  let isRecording = false;
+  let micStream = null;
+
+  const screens = {
+    welcome: document.getElementById('screen-welcome'),
+    activity: document.getElementById('screen-activity'),
+    final: document.getElementById('screen-final')
+  };
+
+  const qCount = document.getElementById('q-count');
+  const scoreValue = document.getElementById('score-value');
+  const dotsEl = document.getElementById('dots');
+  const photoFrame = document.getElementById('photo-frame');
+  const photoImg = document.getElementById('photo-img');
+  const bankEl = document.getElementById('bank');
+  const storyEl = document.getElementById('story');
+  const btnCheck = document.getElementById('btn-check');
+  const hintLine = document.getElementById('hint-line');
+  const correctReveal = document.getElementById('correct-reveal');
+  const feedbackToast = document.getElementById('feedback-toast');
+  const btnListen = document.getElementById('btn-listen');
+  const listenLabel = document.getElementById('listen-label');
+  const btnNext = document.getElementById('btn-next');
+  const btnStart = document.getElementById('btn-start');
+  const btnRetry = document.getElementById('btn-retry');
+  const recordPanel = document.getElementById('record-panel');
+  const recordSentence = document.getElementById('record-sentence');
+  const btnRecord = document.getElementById('btn-record');
+  const recordStatus = document.getElementById('record-status');
+  const recordAudio = document.getElementById('record-audio');
+  const recordNote = document.getElementById('record-note');
+
+  function fullText(it){
+    return it.parts.map(p => isBlank(p) ? p.ans : p).join('');
+  }
+  function capFirst(s){ return s.charAt(0).toUpperCase() + s.slice(1); }
+
+  /* ---------------- Natural human-voice pronunciation (male + female) ----------------
+     Strictly American English (en-US) at every tier, tried in order every
+     single time (a dropped connection never locks the activity into a
+     robotic voice):
+     1) A cloud-quality OS voice already installed in the browser (Microsoft
+        Edge "Online (Natural)" en-US voices, Google US English, Samantha, Alex).
+     2) A recorded-quality neural voice (Amazon Polly, via a free public relay).
+     3) The browser's best built-in en-US voice, only if neither of the above
+        is available or reachable.
+     The voice gender always follows the speaker in the text. */
+  const ttsAudio = document.getElementById('tts-audio');
+  const NEURAL_VOICES = {
+    M: ["Matthew", "Joey"],
+    F: ["Joanna", "Kendra", "Salli"]
+  };
+  let consecutiveFailures = 0;
+  let playToken = 0;
+
+  function pickNeuralVoice(gender, index){
+    const list = NEURAL_VOICES[gender] || NEURAL_VOICES.F;
+    return list[index % list.length];
+  }
+
+  let cachedVoices = [];
+  function refreshVoices(){
+    if('speechSynthesis' in window){ cachedVoices = window.speechSynthesis.getVoices(); }
+  }
+  if('speechSynthesis' in window){
+    refreshVoices();
+    window.speechSynthesis.onvoiceschanged = refreshVoices;
+  }
+
+  function isUS(v){
+    return !!(v && v.lang && v.lang.replace('_','-').toLowerCase() === 'en-us');
+  }
+
+  function pickPremiumVoice(gender, variant){
+    if(!cachedVoices.length) return null;
+    const femaleNames = [
+      /Microsoft (Aria|Jenny|Michelle|Ana) Online \(Natural\)/i,
+      /Google US English/i,
+      /Samantha/i
+    ];
+    const maleNames = [
+      /Microsoft (Guy|Davis|Andrew|Christopher|Eric|Brian|Roger) Online \(Natural\)/i,
+      /Alex/i
+    ];
+    const priorityNames = gender === 'M' ? maleNames : femaleNames;
+    const found = [];
+    for(const rx of priorityNames){
+      cachedVoices.forEach(v => { if(rx.test(v.name) && isUS(v) && found.indexOf(v) === -1) found.push(v); });
+    }
+    if(!found.length) return null;
+    return found[(variant || 0) % found.length];
+  }
+
+  function pickFallbackVoice(gender){
+    const us = cachedVoices.filter(isUS);
+    if(!us.length) return null;
+    const femaleNames = [/Samantha/i, /Zira/i, /Female/i, /Joanna/i, /Aria/i, /Jenny/i, /Victoria/i];
+    const maleNames   = [/Alex/i, /David/i, /Male/i, /Guy/i, /Fred/i, /Matthew/i, /Mark/i];
+    const priorityNames = gender === 'M' ? maleNames : femaleNames;
+    for(const rx of priorityNames){
+      const v = us.find(v => rx.test(v.name));
+      if(v) return v;
+    }
+    return us[0];
+  }
+
+  function speakWithVoice(text, voice, onEnd){
+    if(!('speechSynthesis' in window)){ if(onEnd) onEnd(); return; }
+    window.speechSynthesis.cancel();
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.lang = 'en-US';
+    utter.voice = voice;
+    utter.rate = 0.94; utter.pitch = 1.0; utter.volume = 1;
+    utter.onend = function(){ if(onEnd) onEnd(); };
+    utter.onerror = function(){ if(onEnd) onEnd(); };
+    window.speechSynthesis.speak(utter);
+  }
+
+  function fallbackSpeak(text, gender, variant, onEnd){
+    if(!('speechSynthesis' in window)){ if(onEnd) onEnd(); return; }
+    window.speechSynthesis.cancel();
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.lang = 'en-US';
+    const v = pickFallbackVoice(gender);
+    if(v) utter.voice = v;
+    utter.rate = 0.9;
+    utter.pitch = (gender === 'M' ? 0.95 : 1.05) + ((variant || 0) ? 0.12 : 0);
+    utter.volume = 1;
+    utter.onend = function(){ if(onEnd) onEnd(); };
+    utter.onerror = function(){ if(onEnd) onEnd(); };
+    window.speechSynthesis.speak(utter);
+  }
+
+  function attemptNeural(text, gender, voiceIndex, attempt, onSuccess, onFail){
+    const voiceName = pickNeuralVoice(gender, voiceIndex + attempt);
+    const url = 'https://api.streamelements.com/kappa/v2/speech?voice=' + voiceName + '&text=' + encodeURIComponent(text);
+    let settled = false;
+    const timeoutMs = consecutiveFailures >= 2 ? 4000 : 7000;
+    const safety = setTimeout(function(){
+      if(!settled){ settled = true; try{ ttsAudio.pause(); }catch(e){} onFail(); }
+    }, timeoutMs);
+
+    ttsAudio.onended = function(){
+      if(settled) return; settled = true; clearTimeout(safety);
+      consecutiveFailures = 0; onSuccess();
+    };
+    ttsAudio.onerror = function(){
+      if(settled) return; settled = true; clearTimeout(safety); onFail();
+    };
+
+    try{
+      ttsAudio.src = url;
+      const p = ttsAudio.play();
+      if(p && p.catch){
+        p.catch(function(){ if(settled) return; settled = true; clearTimeout(safety); onFail(); });
+      }
+    }catch(e){
+      if(!settled){ settled = true; clearTimeout(safety); onFail(); }
+    }
+  }
+
+  function speakPhrase(text, gender, variant, onEnd){
+    let finished = false;
+    const finish = function(){ if(!finished){ finished = true; if(onEnd) onEnd(); } };
+
+    const premium = pickPremiumVoice(gender, variant);
+    if(premium){ speakWithVoice(text, premium, finish); return; }
+
+    attemptNeural(text, gender, variant || 0, 0, finish, function(){
+      attemptNeural(text, gender, variant || 0, 1, finish, function(){
+        consecutiveFailures++;
+        fallbackSpeak(text, gender, variant, finish);
+      });
+    });
+  }
+
+  function stopAllAudio(){
+    playToken++;
+    try{ ttsAudio.pause(); }catch(e){}
+    ttsAudio.onended = null; ttsAudio.onerror = null;
+    if('speechSynthesis' in window){ try{ window.speechSynthesis.cancel(); }catch(e){} }
+  }
+
+
+  function stopAllAudio(){
+    playToken++;
+    try{ ttsAudio.pause(); }catch(e){}
+    ttsAudio.onended = null; ttsAudio.onerror = null;
+    if('speechSynthesis' in window){ try{ window.speechSynthesis.cancel(); }catch(e){} }
+  }
+
+  function playCurrent(){
+    const it = ITEMS[current];
+    const myToken = ++playToken;
+    btnListen.classList.add('speaking');
+    btnListen.disabled = true;
+    listenLabel.textContent = 'PLAYING…';
+    speakPhrase(fullText(it), it.voice, 0, function(){
+      if(myToken !== playToken) return;
+      btnListen.classList.remove('speaking');
+      btnListen.disabled = false;
+      listenLabel.textContent = 'LISTEN';
+    });
+  }
+
+  btnListen.addEventListener('click', function(){
+    if(btnListen.disabled || !locked) return;
+    playCurrent();
+  });
+
+  /* ---------------- Voice recording (student practice) ---------------- */
+  function stopMicStream(){
+    if(micStream){
+      micStream.getTracks().forEach(t => t.stop());
+      micStream = null;
+    }
+  }
+
+  async function startRecording(){
+    if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia || typeof MediaRecorder === 'undefined'){
+      recordNote.textContent = 'Your browser does not allow audio recording here. You can still practice out loud.';
+      return;
+    }
+    try{
+      stopAllAudio();
+      micStream = await navigator.mediaDevices.getUserMedia({ audio:true });
+      recordedChunks = [];
+      mediaRecorder = new MediaRecorder(micStream);
+      mediaRecorder.ondataavailable = function(e){ if(e.data && e.data.size > 0) recordedChunks.push(e.data); };
+      mediaRecorder.onstop = function(){
+        const blob = new Blob(recordedChunks, { type:'audio/webm' });
+        const url = URL.createObjectURL(blob);
+        recordAudio.src = url;
+        recordAudio.style.display = 'block';
+        recordStatus.textContent = '✓ Recording ready. Press play to listen to yourself.';
+        stopMicStream();
+      };
+      mediaRecorder.start();
+      isRecording = true;
+      btnRecord.textContent = '■ Stop recording';
+      btnRecord.classList.add('recording');
+      recordStatus.textContent = 'Recording… speak now.';
+      recordNote.textContent = '';
+    }catch(err){
+      recordNote.textContent = 'We could not access your microphone. Please check your browser permissions and try again.';
+    }
+  }
+
+  function stopRecording(){
+    if(mediaRecorder && isRecording){
+      mediaRecorder.stop();
+    }
+    isRecording = false;
+    btnRecord.textContent = '● Record my voice';
+    btnRecord.classList.remove('recording');
+  }
+
+  btnRecord.addEventListener('click', function(){
+    if(isRecording){ stopRecording(); }
+    else { startRecording(); }
+  });
+
+  function resetRecordPanel(){
+    recordPanel.classList.remove('show');
+    recordAudio.style.display = 'none';
+    recordAudio.removeAttribute('src');
+    recordStatus.textContent = '';
+    recordNote.textContent = '';
+    btnRecord.textContent = '● Record my voice';
+    btnRecord.classList.remove('recording');
+    isRecording = false;
+    if(mediaRecorder && mediaRecorder.state !== 'inactive'){
+      try{ mediaRecorder.stop(); }catch(e){}
+    }
+    stopMicStream();
+  }
+
+  /* ---------------- Photo loading ---------------- */
+  function loadPhoto(it){
+    const loading = photoFrame.querySelector('.img-loading');
+    loading.style.display = 'block';
+    loading.textContent = 'Loading photo…';
+    photoImg.style.opacity = '0';
+    photoImg.onload = function(){ loading.style.display = 'none'; photoImg.style.opacity = '1'; };
+    photoImg.onerror = function(){ loading.textContent = 'Photo could not be loaded.'; };
+    photoImg.src = it.img;
+  }
+
+  /* ---------------- Word bank, blanks, tap & drag ---------------- */
+  function shuffled(n){
+    const a = Array.from({length:n}, (_,i) => i);
+    for(let i = a.length - 1; i > 0; i--){
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  function buildStory(it){
+    storyEl.innerHTML = '';
+    let bi = 0;
+    it.parts.forEach(p => {
+      if(!isBlank(p)){ storyEl.appendChild(document.createTextNode(p)); return; }
+      const idx = bi++;
+      const b = document.createElement('span');
+      b.className = 'blank';
+      b.dataset.i = idx;
+      b.setAttribute('role','button'); b.tabIndex = 0;
+      b.addEventListener('click', () => onBlankClick(idx));
+      b.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); onBlankClick(idx); } });
+      storyEl.appendChild(b);
+      const h = document.createElement('span');
+      h.className = 'verb-hint'; h.textContent = '(' + p.verb + ')';
+      storyEl.appendChild(document.createTextNode(' '));
+      storyEl.appendChild(h);
+    });
+    refreshBlanks();
+  }
+
+  function buildBank(it){
+    bankEl.innerHTML = '';
+    order.forEach(ci => {
+      const c = document.createElement('button');
+      c.type = 'button'; c.className = 'chip'; c.dataset.c = ci;
+      c.textContent = it.bank[ci];
+      attachDrag(c, ci);
+      bankEl.appendChild(c);
+    });
+    refreshBlanks();
+  }
+
+  function firstEmpty(){ return placed.findIndex(x => x === null); }
+
+  function placeChip(blankIdx, chipIdx){
+    if(locked) return;
+    placed[blankIdx] = chipIdx;
+    activeBlank = null;
+    hintLine.textContent = '';
+    refreshBlanks();
+  }
+
+  function onBlankClick(idx){
+    if(locked) return;
+    if(placed[idx] !== null){ placed[idx] = null; activeBlank = idx; refreshBlanks(); return; }
+    activeBlank = (activeBlank === idx) ? null : idx;
+    refreshBlanks();
+  }
+
+  function onChipClick(ci){
+    if(locked) return;
+    if(placed.indexOf(ci) !== -1) return;
+    let target = activeBlank !== null && placed[activeBlank] === null ? activeBlank : firstEmpty();
+    if(target === -1 || target === null) return;
+    placeChip(target, ci);
+  }
+
+  function refreshBlanks(){
+    const it = ITEMS[current];
+    storyEl.querySelectorAll('.blank').forEach(b => {
+      const i = +b.dataset.i;
+      const ci = placed[i];
+      b.textContent = ci === null ? '' : it.bank[ci];
+      b.classList.toggle('filled', ci !== null);
+      b.classList.toggle('active', !locked && activeBlank === i && ci === null);
+    });
+    bankEl.querySelectorAll('.chip').forEach(c => {
+      const ci = +c.dataset.c;
+      c.classList.toggle('used', placed.indexOf(ci) !== -1);
+      c.disabled = locked;
+    });
+  }
+
+  // Pointer-based drag (mouse, touch, pen) with a plain tap/click as fallback.
+  function attachDrag(chip, ci){
+    let startX = 0, startY = 0, dragging = false, ghost = null, pid = null, moved = false;
+
+    chip.addEventListener('pointerdown', e => {
+      if(locked || e.button > 0) return;
+      pid = e.pointerId; startX = e.clientX; startY = e.clientY; dragging = false; moved = false;
+      try{ chip.setPointerCapture(pid); }catch(err){}
+    });
+    chip.addEventListener('pointermove', e => {
+      if(pid === null || e.pointerId !== pid) return;
+      if(!dragging && Math.hypot(e.clientX - startX, e.clientY - startY) > 7){
+        dragging = true; moved = true;
+        ghost = document.createElement('div');
+        ghost.className = 'chip-ghost'; ghost.textContent = chip.textContent;
+        document.body.appendChild(ghost);
+        chip.classList.add('selected');
+      }
+      if(dragging){
+        ghost.style.left = e.clientX + 'px'; ghost.style.top = e.clientY + 'px';
+        const el = document.elementFromPoint(e.clientX, e.clientY);
+        storyEl.querySelectorAll('.blank').forEach(b => b.classList.remove('drop-over'));
+        const bl = el && el.closest ? el.closest('.blank') : null;
+        if(bl) bl.classList.add('drop-over');
+      }
+    });
+    function end(e){
+      if(pid === null || (e && e.pointerId !== pid)) return;
+      try{ chip.releasePointerCapture(pid); }catch(err){}
+      pid = null;
+      storyEl.querySelectorAll('.blank').forEach(b => b.classList.remove('drop-over'));
+      if(dragging){
+        const el = document.elementFromPoint(e.clientX, e.clientY);
+        const bl = el && el.closest ? el.closest('.blank') : null;
+        if(ghost){ ghost.remove(); ghost = null; }
+        chip.classList.remove('selected');
+        dragging = false;
+        if(bl){
+          const bi = +bl.dataset.i;
+          if(placed[bi] !== null) placed[bi] = null; // replace the word already there
+          placeChip(bi, ci);
+        }
+      }
+    }
+    chip.addEventListener('pointerup', end);
+    chip.addEventListener('pointercancel', end);
+    chip.addEventListener('click', () => {
+      if(moved){ moved = false; return; }
+      onChipClick(ci);
+    });
+  }
+
+  /* ---------------- Quiz logic ---------------- */
+  function buildDots(){
+    dotsEl.innerHTML = '';
+    ITEMS.forEach(() => { const d = document.createElement('div'); d.className = 'dot'; dotsEl.appendChild(d); });
+  }
+
+  function refreshDots(){
+    [...dotsEl.children].forEach((d,i) => {
+      d.classList.remove('done','current');
+      if(i < current) d.classList.add('done');
+      else if(i === current) d.classList.add('current');
+    });
+  }
+
+  function renderQuestion(){
+    locked = false;
+    stopAllAudio();
+    const it = ITEMS[current];
+    qCount.textContent = 'QUESTION ' + (current + 1) + ' OF ' + ITEMS.length;
+    refreshDots();
+
+    feedbackToast.className = 'feedback-toast';
+    feedbackToast.innerHTML = '';
+    btnNext.style.display = 'none';
+    resetRecordPanel();
+    hintLine.textContent = '';
+    correctReveal.style.display = 'none';
+    correctReveal.innerHTML = '';
+    btnCheck.disabled = false;
+    btnListen.classList.remove('speaking');
+    btnListen.disabled = true;
+    listenLabel.textContent = 'ANSWER FIRST';
+
+    loadPhoto(it);
+
+    placed = it.blanks.map(() => null);
+    activeBlank = null;
+    order = shuffled(it.bank.length);
+    buildStory(it);
+    buildBank(it);
+  }
+
+  function showFeedback(right, total){
+    const all = right === total;
+    feedbackToast.className = 'feedback-toast show ' + (all ? 'correct' : 'incorrect');
+    if(all){
+      feedbackToast.innerHTML = '<svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Perfect! All ' + total + ' blanks are correct.';
+    } else {
+      feedbackToast.innerHTML = '<svg viewBox="0 0 24 24" fill="none"><path d="M12 9v4M12 16.5h.01M12 3l9 16H3L12 3z" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>You got ' + right + ' of ' + total + ' blanks right — the correct text is shown below.';
+      photoFrame.classList.add('shake');
+      setTimeout(() => photoFrame.classList.remove('shake'), 400);
+    }
+  }
+
+  function correctHtml(it){
+    return 'Correct text:<br>' + it.parts.map(p => isBlank(p) ? '<strong>' + p.ans + '</strong>' : p).join('');
+  }
+
+  function checkAnswer(){
+    if(locked) return;
+    if(placed.some(x => x === null)){
+      hintLine.textContent = 'Fill in every blank before pressing Check.';
+      storyEl.classList.add('shake');
+      setTimeout(() => storyEl.classList.remove('shake'), 400);
+      return;
+    }
+    const it = ITEMS[current];
+    locked = true; activeBlank = null;
+    let right = 0;
+    storyEl.querySelectorAll('.blank').forEach(b => {
+      const i = +b.dataset.i;
+      const ok = it.bank[placed[i]] === it.blanks[i].ans;
+      b.classList.remove('filled','active');
+      b.classList.add(ok ? 'is-correct' : 'is-wrong');
+      if(ok) right++;
+    });
+    refreshBlanks();
+    score += right;
+    scoreValue.textContent = score;
+    btnCheck.disabled = true;
+
+    correctReveal.style.display = 'block';
+    correctReveal.innerHTML = correctHtml(it);
+    showFeedback(right, it.blanks.length);
+
+    dotsEl.children[current].classList.add('done');
+    recordSentence.innerHTML = fullText(it).replace(/^./, c => c.toUpperCase());
+    recordPanel.classList.add('show');
+
+    btnListen.disabled = false; listenLabel.textContent = 'LISTEN';
+    playCurrent();
+
+    btnNext.style.display = 'inline-flex';
+    btnNext.firstChild.nodeValue = (current === ITEMS.length - 1) ? 'SEE RESULTS ' : 'NEXT QUESTION ';
+  }
+
+  btnCheck.addEventListener('click', checkAnswer);
+
+  btnNext.addEventListener('click', function(){
+    current++;
+    if(current < ITEMS.length){ renderQuestion(); window.scrollTo({ top:0, behavior:'smooth' }); }
+    else { showFinal(); }
+  });
+
+  function startActivity(){
+    current = 0; score = 0;
+    scoreValue.textContent = 0;
+    document.getElementById('score-total').textContent = TOTAL;
+    buildDots();
+    renderQuestion();
+  }
+
+  btnStart.addEventListener('click', () => {
+    screens.welcome.classList.remove('active');
+    screens.activity.classList.add('active');
+    startActivity();
+  });
+
+  function showFinal(){
+    stopAllAudio(); resetRecordPanel();
+    screens.activity.classList.remove('active');
+    screens.final.classList.add('active');
+    document.getElementById('final-score').textContent = score;
+    document.getElementById('final-total').textContent = TOTAL;
+    const pct = Math.round((score / TOTAL) * 100);
+    document.getElementById('progress-fill').style.width = '0%';
+    setTimeout(() => { document.getElementById('progress-fill').style.width = pct + '%'; }, 150);
+  }
+
+  btnRetry.addEventListener('click', () => {
+    screens.final.classList.remove('active');
+    screens.activity.classList.add('active');
+    startActivity();
+  });
+
+})();
+</script>
+
+</body>
+</html>
